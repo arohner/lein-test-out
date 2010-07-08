@@ -1,8 +1,12 @@
 (ns leiningen.test-out
   (:use [leiningen.compile :only [eval-in-project]]
-        [clojure.java.io :only [file]]
-        [clojure.pprint :only [pprint]]
+        
         [clojure.contrib.find-namespaces :only [find-namespaces-in-dir]]))
+
+(try
+ (use '[clojure.java.io :only [file]])
+ (catch Throwable e
+   (use '[clojure.contrib.io :only [file]])))
 
 (defn require-all-test-namespaces
   "returns a form that when eval'd, requires all test namespaces"
