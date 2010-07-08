@@ -25,9 +25,9 @@
       (System/exit 1))))
 
 (defn run-form [project format filename]
-  (let [format-fn (if (= format "xml")
-                    'clojure.test.junit/with-junit-output
-                    'clojure.test.tap/with-tap-output)]
+  (let [format-fn (if (= format "tap")
+                    'clojure.test.tap/with-tap-output
+                    'clojure.test.junit/with-junit-output)]
     `(do
      (try
       ~(require-all-test-namespaces project)
