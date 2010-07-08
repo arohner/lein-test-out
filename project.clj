@@ -1,0 +1,1 @@
+(defproject lein-test-out "0.1.0")
