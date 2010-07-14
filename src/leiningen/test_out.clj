@@ -54,6 +54,7 @@ By default, outputs junit XML to testreports.xml."
      project
      nil
      (fn [java]
+       (.setFork java true)
        (doseq [form forms]
          (.setValue (.createArg java) "-e")
          (.setValue (.createArg java) (prn-str form)))))))
