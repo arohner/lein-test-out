@@ -52,9 +52,8 @@ By default, outputs junit XML to testreports.xml."
                (run-form project format filename)]]
     (eval-in-project
      project
-     nil
-     (fn [java]
-       (.setFork java true)
-       (doseq [form forms]
-         (.setValue (.createArg java) "-e")
-         (.setValue (.createArg java) (prn-str form)))))))
+     (second forms) ;; form
+     nil ;; handler
+     nil ;; skip-auto-compile
+     (first forms) ;; init
+     )))
