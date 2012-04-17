@@ -13,3 +13,6 @@ test-out optionally takes an output format, and a filename to write to:
 Valid output formats are "junit" and "tap". 
 
 
+License
+=======
+EPL, the same as Clojure
