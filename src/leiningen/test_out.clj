@@ -1,7 +1,7 @@
 (ns leiningen.test-out
-  (:use [leiningen.compile :only [eval-in-project]]
-        
-        [clojure.contrib.find-namespaces :only [find-namespaces-in-dir]]))
+  (:use [leiningen.core.eval :only [eval-in-project]]
+
+        [clojure.tools.namespace :only [find-namespaces-in-dir]]))
 
 (try
  (use '[clojure.java.io :only [file]])
@@ -12,8 +12,9 @@
   "returns a form that when eval'd, requires all test namespaces"
   [project]
   `(do
-     ~@(for [ns (find-namespaces-in-dir (file (:test-path project)))]
-         `(require (quote ~ns)))))
+     ~@(apply concat (for [p (:test-paths project)]
+                       (for [ns (find-namespaces-in-dir (file p))]
+                         `(require (quote ~ns)))))))
 
 (defn require-clojure-test-form []
   `(try
@@ -31,7 +32,7 @@
     `(do
      (try
       ~(require-all-test-namespaces project)
-      (with-open [file-stream# (java.io.FileWriter. ~filename)] 
+      (with-open [file-stream# (java.io.FileWriter. ~filename)]
         (binding [~'*out* file-stream#
                   clojure.test/*test-out* file-stream#]
           (~format-fn (clojure.test/run-all-tests))
@@ -53,7 +54,7 @@ By default, outputs junit XML to testreports.xml."
     (eval-in-project
      project
      (second forms) ;; form
-     nil ;; handler
-     nil ;; skip-auto-compile
+     ;nil ;; handler
+     ;nil ;; skip-auto-compile
      (first forms) ;; init
      )))
