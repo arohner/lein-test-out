@@ -1,3 +1,3 @@
-(defproject lein-test-out "0.3.0"
-  :dev-dependencies [[org.clojure/clojure "1.5.1"]
-                     [org.clojure/tools.namespace "0.1.3"]])
+(defproject lein-test-out "0.3.1"
+            :eval-in-leiningen true
+            :dependencies [[org.clojure/tools.namespace "0.2.3"]])
