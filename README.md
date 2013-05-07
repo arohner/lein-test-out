@@ -3,7 +3,8 @@ lein-test-out is a leiningen plugin that runs all your tests and outputs to a fi
 Installation
 ============
 
-Add [lein-test-out "0.3.0"] as a dev-dependency to your project.clj. 0.3.0 is only supported on lein 2. For lein 1 support, use v 0.2.0 or earlier.
+lein-test-out 0.3.0 is only supported on lein 2. For lein 1 support, use v 0.2.0 or earlier.
+Just add ```:plugins [[lein-test-out "0.3.1"]]``` into your project.clj.
 
 Usage
 =====
