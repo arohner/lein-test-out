@@ -1,7 +1,6 @@
 (ns leiningen.test-out
   (:use [leiningen.core.eval :only [eval-in-project]]
-
-        [clojure.tools.namespace :only [find-namespaces-in-dir]]))
+        [clojure.tools.namespace.find :only [find-namespaces-in-dir]]))
 
 (try
  (use '[clojure.java.io :only [file]])
