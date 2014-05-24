@@ -33,8 +33,7 @@
      (try
       ~(require-all-test-namespaces project)
       (with-open [file-stream# (java.io.FileWriter. ~filename)]
-        (binding [~'*out* file-stream#
-                  clojure.test/*test-out* file-stream#]
+        (binding [clojure.test/*test-out* file-stream#]
           (~format-fn (clojure.test/run-all-tests))
           (catch Throwable e#
             (clojure.test/is false (format "Uncaught exception: %s" e#))
