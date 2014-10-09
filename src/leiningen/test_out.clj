@@ -1,6 +1,6 @@
 (ns leiningen.test-out
+  (:require [leiningen.core.project])
   (:use [leiningen.core.eval :only [eval-in-project]]
-
         [clojure.tools.namespace :only [find-namespaces-in-dir]]))
 
 (try
@@ -48,11 +48,12 @@ Usage: lein test-out <format> <filename>
 
 By default, outputs junit XML to testreports.xml."
   [project & [format filename]]
-  (let [filename (or filename "testreports.xml")
+  (let [project-merged (leiningen.core.project/merge-profiles project [:leiningen/test :test])
+        filename (or filename "testreports.xml")
         forms [(require-clojure-test-form)
-               (run-form project format filename)]]
+               (run-form project-merged format filename)]]
     (eval-in-project
-     project
+     project-merged
      (second forms) ;; form
      ;nil ;; handler
      ;nil ;; skip-auto-compile
